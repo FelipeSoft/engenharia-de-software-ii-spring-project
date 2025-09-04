@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import br.com.ecommerce.api.domain.entities.Product;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
@@ -27,13 +28,13 @@ public class ProductController {
         this.productService.updateProduct(product);
     }
 
-    @PatchMapping
-    public void deleteProduct(Long id) {
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable Long id) {
         this.productService.deleteProduct(id);
     }
 
     @GetMapping("/{id}")
-    public Product findProductDetailsBySKU(@PathVariable Long id) {
+    public Optional<Product> findProductDetailsBySKU(@PathVariable Long id) {
         return this.productService.findProductDetailsById(id);
     }
 }
